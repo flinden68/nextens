@@ -21,6 +21,7 @@
 #include <iostream>
 #include <string>
 #include "MsgClass.h"
+#include <cstdlib>
 
 using std::cerr;
 using std::endl;

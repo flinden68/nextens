@@ -5,6 +5,7 @@ syntax: glob
 *.o
 *~
 *make.depend
+*.buildlib_Festival
 
 speech_tools
 speech_tools/*
@@ -229,3 +230,11 @@ festival/src/modules/Makefile
 festival/src/modules/VCLocalRules
 festival/src/modules/init_modules.cc
 
+festival/src/modules/NextensTimbl/Timbl5/Timbl
+festival/src/modules/NextensTimbl/Timbl5/TimblClient
+festival/src/modules/NextensTimbl/Timbl5/libTimbl.a
+
+festival/src/modules/NextensMbt/Mbt2/Mbt
+festival/src/modules/NextensMbt/Mbt2/Mbtg
+festival/src/modules/NextensMbt/Mbt2/demo
+festival/src/modules/NextensMbt/Mbt2/libMbt.a

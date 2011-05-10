@@ -34,6 +34,7 @@
 #include <sstream>
 #endif
 #include "Common.h"
+#include <limits.h>
 
 using namespace std;
 
