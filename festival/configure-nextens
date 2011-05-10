@@ -6,12 +6,16 @@
 echo "
 ALSO_INCLUDE += NextensFonpars NextensTimbl NextensMbt NextensPraat
 
-ifdef DISPLAY
-  COMPILERLIBS += -L/usr/X11R6/lib -lX11
-endif
+# No longer required under linux
+#ifdef DISPLAY
+#  COMPILERLIBS += -L/usr/X11R6/lib -lX11
+#endif
 
 COMPILERLIBS += -L\$(TOP)/src/modules/NextensMbt/Mbt2 -lMbt
 COMPILERLIBS += -L\$(TOP)/src/modules/NextensTimbl/Timbl5 -lTimbl
+
+# temporary fix to get NextensPraat compiled under linux
+COMPILERLIBS += $(shell pkg-config --libs gtk+-2.0)
 " >> config/config
 
 echo "Nextens configured. Run make now.

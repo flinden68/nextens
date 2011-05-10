@@ -21,9 +21,17 @@ SRCS = sendpraat.cc PraatInit.cc
 
 OBJS = $(SRCS:.cc=.o)
 
-FILES = Makefile $(SRCS)
+FILES = Makefile $(SRCS)	
 
 LOCAL_INCLUDES = -I.
+
+
+ifeq '$(shell uname -s)' "Linux"
+LOCAL_INCLUDES += -std=gnu99 \
+                  -DUNIX \
+                  $(shell pkg-config --cflags --libs gtk+-2.0)
+endif
+
 
 ifeq '$(shell uname -s)' "Darwin"
 LOCAL_INCLUDES += -framework CoreServices \
