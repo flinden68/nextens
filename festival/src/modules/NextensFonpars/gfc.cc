@@ -29,13 +29,12 @@
 #include <stdlib.h>
 
 // original: void *malloc(unsigned);
-// Required to compile Fonpars on Mac OS X
-#if defined(__APPLE__)
-  void *malloc(long unsigned int);
-#else
-  void *malloc(unsigned);
-#endif
-
+// changed to compile on Darwin and Linux - not sure about Windows yet
+//#if defined(__APPLE__)
+    void *malloc(long unsigned int);
+//#else
+//  void *malloc(unsigned);
+//#endif
 
 void free(void *p);
 void exit(int);
