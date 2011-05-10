@@ -1,0 +1,295 @@
+================================================================================
+NEXTENS.README
+================================================================================
+
+NEXTENS: Nederlands Extensie voor Tekst naar Spraak
+         'Dutch Extension for Text to Speech'
+
+Version: 1.0,  June 2007
+
+http://nextens.uvt.nl
+
+
+Principal authors: Erwin Marsi, Joop Kerkhoff, Albert Russel
+
+
+Copyright 2002-2007:
+
+Induction of Linguistic Knowledge Group 
+Tilburg University
+P.O. Box 90153
+5000 LE Tilburg
+The Netherlands
+
+Department of Language and Speech
+University of Nijmegen
+P.O. Box 9103
+6500 HD Nijmegen
+The Netherlands
+
+Stichting Spraaktechnologie
+Trans 10
+3512 JK Utrecht 
+The Netherlands
+
+
+Contact:
+
+Erwin Marsi
+e.c.marsi@uvt.nl
+
+
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+This the README file for the NEXTENS source distribution for Linux, MS
+Windows (through Cygwin), and Mac OS X. NEXTENS stands for
+'Nederlandse Extensie voor Tekst-naar-Spraak' (Dutch extension for
+text-to-speech). It is an extension to the Festival speech synthesis
+system providing text to speech conversion for Dutch. For more
+information, see http://nextens.uvt.nl.
+
+ 
+--------------------------------------------------------------------------------
+LICENSE
+--------------------------------------------------------------------------------
+
+Conditions on usage and/or copying of the NEXTENS software are defined
+in the files NEXTENS.COPYING and NEXTENS.LICENSE.
+
+
+--------------------------------------------------------------------------------
+REQUIREMENTS
+--------------------------------------------------------------------------------
+
+Supported Systems
+-----------------
+
+We have recently compiled and tested NEXTENS on the following systems:
+
+- GNU/Linux 
+  * i486 (2.6.12), gcc 3.3.6
+- MS Windows XP under Cygwin, 
+  * using cygwin1.dll version 1.5.19-4 and gcc 3.4.4,
+  * using cygwin1.dll version 1.5.24-2 and gcc 3.4.4
+- Mac OS X 
+  * PPC Darwin (PowerPC), 10.4.6 (Tiger), gcc 3.3
+  * X86 Darwin (Intel), 10.4.9., gcc 4.0.1
+
+on the basis of the latest speech tools and festival releases:
+
+- speech_tools-1.2.96-beta.tar.gz
+- festival-1.96-beta.tar.gz
+
+It will probably compile on other Unix platforms and with earlier
+versions of gcc well. The sources are *not* compatible with Visual C++
+or other native Windows compilers, because additional software is used
+(e.g. Timbl and Mbt) which will not compile with VC++.
+
+
+Dependencies
+------------
+
+Before trying to compile the NEXTENS sources, make sure you have
+succesfully build the Festival Speech Synthesis System (currenly
+version 1.96-beta), which requires the Edinburgh Speech Tools
+(currently version 1.2.96-beta), obtainable from
+http://www.cstr.ed.ac.uk/projects/festival/ or
+http://festvox.org/festival/index.html In case of problems, check the
+Festival mailings lists at http://festvox.org/maillists.html, which
+are archived at http://marc.info/?l=festival-talk&w=4 or
+https://lists.berlios.de/pipermail/festlang-talk/
+
+--------------------------------------------------------------------------------
+BUILD
+--------------------------------------------------------------------------------
+
+1. We assume you have a single directory that contains the builds of
+   the 'festival' and 'speech_tools' directories. Change to that
+   directory.
+
+2. Unpack the Nextens sources with
+
+      tar xvzf nextens-src-1.0.tar.gz'. 
+
+   Note: Do *not* use Windows zip programs (e.g. WinZip), as they may
+   corrupt the file format.
+
+3. Change to the 'festival' directory
+
+4. If you are using a standard installation of Festival, just replace
+   your curent Festival config file with the the Nextens config file,
+   using:
+
+       cp config/config.nextens config/config 
+
+   and then go on to step 7.
+
+   If you are using a *non-standard* installation of Festival, that is,
+   if you manually modified the Festival config file, then you have to
+   add the following line to it:
+
+       ALSO_INCLUDE += NextensFonpars NextensTimbl NextensMbt
+
+5. In the same file, find the section called
+
+      ## Describe your local system below by redefining things defined
+      ## in config/configs/default.mak.
+
+   and add the following lines
+
+      COMPILERLIBS += -L$(TOP)/src/modules/NextensMbt/Mbt2 -lMbt
+      COMPILERLIBS += -L$(TOP)/src/modules/NextensTimbl/Timbl5 -lTimbl
+
+
+6. If you you want to use the interface to Praat,
+   you must also add:
+
+       ALSO_INCLUDE += NextensPraat
+
+       ifdef DISPLAY
+         COMPILERLIBS += -L$(X11_LIB) -lX11
+       endif
+
+   Note that you may have to modify the path according to the
+   appropriate location of your X11 libraries.
+ 
+7. Type 'make' to build the Nextens extensions 
+
+
+--------------------------------------------------------------------------------
+TEST
+--------------------------------------------------------------------------------
+
+1. Start festival
+
+2. Initialize Dutch voice
+
+      festival> (voice_net_nl_ib_mbrola )
+      Initializing voice net_nl_ib_mbrola
+      Please wait...
+      Phoneset "net_nl" redefined
+      net_nl_ib_mbrola
+
+3. Synthesize some text
+
+      festival> (SayText "Hallo wereld") 
+      #<Utterance 0x2ed51b0>
+
+--------------------------------------------------------------------------------
+CONFIGURATION
+--------------------------------------------------------------------------------
+
+- If you want to use Dutch by default, put the following line in the
+  file festival/lib/siteinit.scm, or alternatively .festivalrc in your
+  home directory:
+
+	(set! voice_default 'voice_net_nl_ib_mbrola)
+
+  If you do not have these initialization files, you can create them.
+
+
+
+--------------------------------------------------------------------------------
+DOCUMENTATION
+--------------------------------------------------------------------------------
+
+Further documentation can be found in the directory festival/doc/net_nl
+
+
+-------------------------------------------------------------------------------- 
+KNOWN ISSUES
+--------------------------------------------------------------------------------
+
+All platforms:
+
+- A 'make clean' from within the festival dir does not clean the
+  Nextens modules in src/modules (as it should). You have to do this
+  manually by going to festival/src/modules/Nextens* and typing 'make
+  clean'
+
+Linux:
+
+- We've encountered problems during linking of the NextensTimbl and NextensMbt
+  code with gcc version 3.2.2 for Linux. Error messages complain about  
+  undefined references to string functions in the C++ libraries. This may be 
+  a compiler bug. A work-around is to open the file 
+  speech_tools/config/compilers/gcc_defaults.mak, and to remove the
+  -fno-implicit-templates option from CXXFLAGS.
+
+
+--------------------------------------------------------------------------------
+ACKNOWLEDGEMENTS
+--------------------------------------------------------------------------------
+
+The NEXTENS software was developed by Erwin Marsi from the University
+of Tilburg (Scheme code), Joop Kerkhoff from the University of
+Nijmegen (Scheme code), and Albert Russel from Plankton (C++ code)
+within the NEXTENS project. The project was financially supported
+with a grant from Stichting Spraaktechnologie.
+
+The following people and organisations have contributed to the
+development of NEXTENS in various ways.
+
+- Alan W. Black, Paul Taylor, Richard Caley and others (see
+  festival/ACKNOWLEDGMENTS) for making the Festival Speech Synthesis
+  System freely available
+
+- the Department of Language and Speech at the University of Nijmegen
+  for allowing resuse of several parts of the KUNTTS system, among
+  which the Fonpars rule compiler, the lexicon, and the rule system
+  for F0 and duration calculation
+
+- Antal van den Bosch, Walter Daelemans, Ko van der Sloot and many
+  other members of the ILK group at Tilburg University and the CNTS
+  group at University of Antwerp for providing the Tilburg
+  memory-based learner (Timbl) and the Memory-based POS tagger (Mbt)
+
+- Peter-Arno Coppen, Carla Schelfhout and others from L&S at the
+  University of Nijmegen for providing the Amazon parser for Dutch 
+
+- Thierry Dutoit from Faculte Polytechnique de Mons for making the
+  Mbrola diphone synthesizer freely available
+
+- Esther Klabbers en Raymond Veldhuis for releasing the nl3 diphone
+  database, while they were working at the Center for Research on
+  User-System Interaction, Eindhoven University
+
+- Arthur Dirksen for releasing the nl2 diphone database
+
+- Paul Boersma (Institute of Phonetic Sciences, University of
+  Amsterdam) for the sendpraat.cc code, which is the core of the
+  Festival to Praat interface
+
+- Antal van den Bosch and Toni Rietveld for support on getting the
+  Nextens project going
+
+- Esther Klabbers for providing the Lucent-type duration module
+
+- Olga van Herwijnen for advise on implementing her phrasing algorithm
+
+- Ko van der Sloot for help with the Mbt API and the make files.
+
+- Nanneke Konings for the TreeTalk postprocessing rules
+
+- Jelske Dijkstra for identifying a number of bugs while working on
+  Frisian TTS
+
+- Herbert Buurman for the script to extract reference documentation
+  on Scheme and C functions provided by Nextens
+
+- Redhat Inc. for providing Cygwin
+
+
+(Please let us know if you think you ought to be mentioned here.)
+
+
+$Id: NEXTENS.README,v 1.10 2007/06/18 08:52:14 emarsi Exp $
+
+
+
+
+
+

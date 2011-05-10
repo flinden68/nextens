@@ -1,0 +1,63 @@
+TiMBL 5.1 (c) ILK/CNTS 1998-2004
+
+Tilburg Memory Based Learner
+
+Induction of Linguistic Knowledge Research Group, Tilburg University and
+Centre for Dutch Language and Speech, University of Antwerp
+
+This is an extension to the fifth main release of Timbl.
+
+While this is NOT a Beta version it may still contain some bugs or
+behave not exactly as documented or expected. Comments and
+bug-reports are welcome at: Timbl@uvt.nl. Updates and more info
+may be found on our website: http://ilk.uvt.nl/ .
+
+Please also read our Licensing information in licence.terms .
+
+This software has been tested on:
+- Sparc platform running Solaris 2.8
+- Intel platform running several vesrions of Linux
+- PPC platform running Darwin
+- MIPS-SGI platform running IRIX 6.5
+
+These systems used various versions of GCC (2.95.3 - 3.4.x).
+But it is highly recommended to upgrade to at least GCC 3.2
+
+Contents of this distribution:
+- sources
+- Licensing information ( License.terms )
+- Makefile for Gnu Make
+- example data files ( in the demos directory )
+- documentation ( in the docs directory )
+
+How to install:
+
+- unpack the distribution:
+  > gunzip Timbl.5.1.tar.gz
+  > tar xvf Timbl.5.1.tar
+
+- the package is now in the directory ./Timbl5. Go to that
+  directory:
+  > cd Timbl5
+
+- make the Timbl executable by typing make:
+  > make
+ 
+  If GNU make is not your default make program, you probably need to
+  type gmake or gnumake.
+
+  Make will also create a sample client for a Timbl server (TimblClient).
+  The demonstration programmes in the demos directory require a 
+  separate make. Executables and object files are typically placed in 
+  the cwd, except on Solaris systems, where they are placed in ./SPARC 
+  for Sparc or ./X86 for Intel-Solaris.
+
+- make sure that the Timbl program becomes accessible in your path:
+  either: add the Timbl directory to your path
+      or: move the program to your favourite bin directory,
+          you might need to use the rehash command after that.
+
+- you can test your build using the provided example files:
+  > Timbl -f demos/dimin.train -t demos/dimin.test
+
+Good luck -- send questions and comment to Timbl@uvt.nl .

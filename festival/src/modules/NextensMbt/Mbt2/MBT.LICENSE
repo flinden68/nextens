@@ -1,0 +1,70 @@
+Licensing Terms
+
+Downloading and using the MBT software implies that you accept the
+following license terms:
+
+Tilburg University and University of Antwerp (henceforth
+``Licensers'') grant you, the registered user (henceforth ``User'')
+the non-exclusive license to download a single copy of the MBT
+program code and related documentation (henceforth jointly referred to
+as ``Software'') and to use the copy of the code and documentation
+solely in accordance with the following terms and conditions:
+
+The license is only valid when you register as a user. If you
+have obtained a copy without registration, you must immediately
+register by sending an e-mail to mbt@uvt.nl.
+
+User may only use the Software for educational or non-commercial
+research purposes.
+
+Users may make and use copies of the Software internally for
+their own use.
+
+Without executing an applicable commercial license with
+Licensers, no part of the code may be sold, offered for sale, or made
+accessible on a computer network external to your own or your
+organization's in any format; nor may commercial services utilizing
+the code be sold or offered for sale. No other licenses are granted or
+implied.
+
+Licensers have no obligation to support the Software it is
+providing under this license.  To the extent permitted under the
+applicable law, Licensers are licensing the Software "AS IS", with no
+express or implied warranties of any kind, including, but not limited
+to, any implied warranties of merchantability or fitness for any
+particular purpose or warranties against infringement of any
+proprietary rights of a third party and will not be liable to you for
+any consequential, incidental, or special damages or for any claim by
+any third party.
+
+Under this license, the copyright for the Software remains the
+joint property of the ILK Research Group at Tilburg University, and
+the CNTS Research Group at the University of Antwerp.  Except as
+specifically authorized by the above licensing agreement, User may not
+use, copy or transfer this code, in any form, in whole or in part.
+
+Licensers may at any time assign or transfer all or part of their
+interests in any rights to the Software, and to this license, to an
+affiliated or unaffiliated company or person.
+
+Licensers shall have the right to terminate this license at any
+time by written notice. User shall be liable for any infringement or
+damages resulting from User's failure to abide by the terms of this
+License.
+
+In publication of research that makes use of the Software, a citation
+should be given of: ``Walter Daelemans, Jakub Zavrel, Ko van der
+Sloot, and Antal van den Bosch (2003). MBT: Memory Based
+Tagger, version 2.0, Reference Guide. ILK Technical Report 03-13,
+Available from http://ilk.uvt.nl/downloads/pub/papers/ilk.0313.pdf
+
+For information about commercial licenses for the Software,
+contact mbt@uvt.nl, or send your request in writing to:
+
+Prof.dr. Walter Daelemans
+CNTS / Center for Computational Language and Speech Processing
+GER - University of Antwerp
+Universiteitsplein 1
+B-2610 Wilrijk (Antwerp)
+Belgium
+

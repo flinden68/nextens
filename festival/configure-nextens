@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# run this if you want the default Nextens configuration
+# with all modules enabled as described in NEXTENS.README
+
+echo "
+ALSO_INCLUDE += NextensFonpars NextensTimbl NextensMbt NextensPraat
+
+ifdef DISPLAY
+  COMPILERLIBS += -L/usr/X11R6/lib -lX11
+endif
+
+COMPILERLIBS += -L\$(TOP)/src/modules/NextensMbt/Mbt2 -lMbt
+COMPILERLIBS += -L\$(TOP)/src/modules/NextensTimbl/Timbl5 -lTimbl
+" >> config/config
+
+echo "Nextens configured. Run make now.
+"

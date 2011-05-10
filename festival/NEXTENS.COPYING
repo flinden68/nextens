@@ -1,0 +1,37 @@
+======================================================================
+NEXTENS.COPYING
+======================================================================
+
+The complete NEXTENS software distribution (see NEXTENS.FILES)
+includes several other pieces of software, each with its own licensing terms.
+
+- For the Festival Speech Synthesis System, the licensing terms are
+  defined in the file festival/COPYING.
+
+- For the Mbrola speech synthesizer, the licensing terms are
+  defined in the file festival/lib/etc/MBROLA.LICENSE.
+
+- For the NL2 diphone database, the licensing terms are defined in the
+  file lib/voices/dutch/net_nl_ad_mbrola/nl2/NL2.LICENSE
+
+- For the NL3 diphone database, the licensing terms are defined in the
+  file lib/voices/dutch/net_nl_ib_mbrola/nl3/NL3.LICENSE
+
+- For the Amazon parser, the licensing terms are defined in the
+  file festival/lib/etc/AMAZON.LICENSE
+
+- For the Cygwin Unix environment for Windows, the licensing terms are
+  defined in the file festival/lib/etc/CYGWIN.LICENSE. Note: this
+  concerns only the NEXTENS distributions for Cygwin + MS Windows.
+
+- For the Timbl classifier, the licensing terms are defined in the
+  file festival/src/modules/NextensTimbl/Timbl5/License.terms
+
+- For the Mbt POS tagger, the licensing terms are defined in the file
+  festival/src/modules/NextensMbt/Mbt2/License.terms 
+
+All other sofware in the NEXTENS software distribution is subject to
+the license described in the festival/NEXTENS.LICENSE.
+
+
+$Id: NEXTENS.COPYING,v 1.3 2006/05/12 16:23:18 emarsi Exp $

@@ -1,0 +1,75 @@
+#
+# example script file for tse demo program.
+#
+# create an experiment with name exp1
+#
+new exp1
+#
+# make sure that we see something happen
+#
+exp1.set +v+f+di+O
+#
+# now train ( prepare is implicit)
+#
+exp1.train ./dimin.train
+#
+# save the Instancebase for later use.
+#
+exp1.save tree.tmp
+exp1.show options
+#
+#
+# first we start with OVERLAP metric
+#
+exp1.set -mO
+#
+# we perform tests using three kinds of weighting
+#
+exp1.set -w NW
+exp1.test ./dimin.test a1.tmp
+exp1.set -w GR
+exp1.test ./dimin.test b1.tmp
+exp1.set -w IG
+exp1.test ./dimin.test c1.tmp
+
+#
+# now we try the Value Difference Metric
+exp1.set -mM
+#
+exp1.set -w nw
+exp1.test ./dimin.test a2.tmp
+exp1.set -w gainratio
+exp1.test ./dimin.test b2.tmp
+exp1.set -w infogain
+exp1.test ./dimin.test c2.tmp
+
+#
+# and now we redo OVERLAP but with inverted files
+#
+exp1.set -mO
+exp1.set --
+#
+exp1.set -w nw
+exp1.test ./dimin.test a3.tmp
+exp1.set -w gainratio
+exp1.test ./dimin.test b3.tmp
+exp1.set -w infogain
+exp1.test ./dimin.test c3.tmp
+#
+# start a new experiment:
+new exp2
+#
+# fill it with de tree generated with exp1
+#
+exp2.get tree.tmp
+#
+# let's make a lot of noice!
+exp2.set +v +o+f+di+n+db
+#
+# now delete exp1, to demonstrate that it works.
+free exp1
+#
+# end perform a test with exp2
+exp2.test ./dimin.test exp2.out.tmp
+#
+# ready

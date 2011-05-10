@@ -1,0 +1,276 @@
+================================================================================
+NEXTENS-TIMBL.README
+================================================================================
+
+NEXTENS: Nederlands Extensie voor Tekst naar Spraak
+         'Dutch Extension for Text to Speech'
+
+http://nextens.uvt.nl
+
+
+Principal authors: Erwin Marsi, Joop Kerkhoff, Albert Russel
+
+
+Induction of Linguistic Knowledge Group 
+Computational Linguistics and AI section
+Tilburg University
+P.O. Box 90153
+5000 LE Tilburg
+The Netherlands
+
+Department of Language and Speech
+University of Nijmegen
+P.O. Box 9103
+6500 HD Nijmegen
+The Netherlands
+
+Stichting Spraaktechnologie
+Trans 10
+3512 JK Utrecht 
+The Netherlands
+
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+This is the README file for the Festival-to-TiMBL interface, which has
+been developed within the NEXTENS project. It provides a Scheme
+interface to the Tilburg Memory-Based Learner. TiMBL can serve as an
+alternative to CART. Within the NEXTENS project, TiMBL is used for NLP
+tasks such as POS tagging, graheme-to-phoneme conversion, phrasing and
+accent placement. For further information on TiMBL, see
+http://ilk.uvt.nl/software.html.
+
+
+--------------------------------------------------------------------------------
+LICENSE
+--------------------------------------------------------------------------------
+
+Conditions on usage and/or copying of the *interface* code are defined
+in the files NEXTENS.COPYING and NEXTENS.LICENSE.
+
+Conditions on usage and/or copying of the *Timbl* code itself are in the
+file TIMBL.LICENSE.
+
+
+--------------------------------------------------------------------------------
+REQUIREMENTS
+--------------------------------------------------------------------------------
+
+Supported Systems
+-----------------
+
+We have successfully build and tested NEXTENS-TIMBL, using recent
+versions of gcc, on various Linux systems, and on MS Windows
+(98,2000,XP) under Cygwin. It will probably work on other unix
+platforms.
+
+Dependencies
+------------
+
+Before trying to compile the NEXTENS-TIMBL sources, make sure that you
+have succesfully build and installed sources of the Festival Speech
+Synthesis System (version 2.4.2 or 2.4.3) and the Edinburgh Speech
+Tools (version 1.2.1 or 1.2.3).  See
+http://www.cstr.ed.ac.uk/projects/festival/
+
+
+--------------------------------------------------------------------------------
+BUILD
+--------------------------------------------------------------------------------
+
+1. Change directory to the one that contains the 'festival' and
+   'speech_tools' directories
+
+2. Unpack the sources with 'tar xvzf nextens-timbl-*.tar.gz'. 
+
+   (Do *not* use Windows zip programs (e.g. WinZip), as they may
+   corrupts the file format.)
+
+3. Change to the Festival directory
+
+4. In the file "config/config", find the section called
+
+      ## Add any extra modules you wish to include
+
+   and add the following lines to it:
+
+      ALSO_INCLUDE += NextensTimbl
+
+5. Type 'make' to build 
+
+
+--------------------------------------------------------------------------------
+USAGE
+--------------------------------------------------------------------------------
+
+Within Festival, the following command:
+
+   (Timbl.usage)
+
+prints an overview of all the functions defined by the interface.
+
+A tutorial on using TiMBL from within Festival is beyond the scope of
+this readme file. However, stand-alone usage of TiMBL is extensively
+covered in the TiMBL User Manual. The NEXTENS code provides several
+examples of how to use TiMBL for such tasks as POS tagging,
+grapheme-to-phoneme conversion, phrasing and accent placement.
+
+
+--------------------------------------------------------------------------------
+DOCUMENTATION
+--------------------------------------------------------------------------------
+
+See the Timbl User Manual in the directory
+festival/src/modules/NextensTimbl/doc/
+
+
+-------------------------------------------------------------------------------- 
+KNOWN ISSUES
+--------------------------------------------------------------------------------
+
+- A 'make clean' from within the festival dir does not clean the
+  NextensMbt dir (as it should). You have to do this manually.
+
+- We've encountered problems during linking of the NextensTimbl and NextensMbt
+  code with gcc version 3.2.2 for Linux. Error messages complain about  
+  undefined references to string functions in the C++ libraries. This may be 
+  a compiler bug. A work-around is to open the file 
+  speech_tools/config/compilers/gcc_defaults.mak, and to remove the
+  -fno-implicit-templates option from CXXFLAGS.
+
+
+--------------------------------------------------------------------------------
+ACKNOWLEDGEMENTS
+--------------------------------------------------------------------------------
+
+The NEXTENS software was developed by Erwin Marsi from Tilburg
+University (Scheme code), Joop Kerkhoff from the University of
+Nijmegen (Scheme code), and Albert Russel from Plankton (C++ code)
+within the NEXTENS project. The project was financially supported with
+a grant from Stichting Spraaktechnologie.
+
+The following people and organisations have contributed to the
+development of NEXTENS in various ways.
+
+- Alan W. Black, Paul Taylor, Richard Caley and others (see
+  festival/ACKNOWLEDGMENTS) for making the Festival Speech Synthesis
+  System freely available
+
+- the Department of Language and Speech at the University of Nijmegen
+  for allowing resuse of several parts of the KUNTTS system, among
+  which the Fonpars rule compiler, the lexicon, and the rule system
+  for F0 and duration calculation
+
+- Antal van den Bosch, Walter Daelemans, Ko van der Sloot and many
+  other members of the ILK group at Tilburg University and the CNTS
+  group at University of Antwerp for providing the Tilburg
+  memory-based learner (Timbl) and the Memory-based POS tagger (Mbt)
+
+- Peter-Arno Coppen, Carla Schelfhout and others from L&S at the
+  University of Nijmegen for providing the Amazon parser for Dutch 
+
+- Thierry Dutoit from Faculte Polytechnique de Mons for making the
+  Mbrola diphone synthesizer freely available
+
+- Esther Klabbers en Raymond Veldhuis for releasing the nl3 diphone
+  database, while they were working at the Center for Research on
+  User-System Interaction, Eindhoven University
+
+- Paul Boersma (Institute of Phonetic Sciences, University of
+  Amsterdam) for the sendpraat.cc code, which is the core of the
+  Festival to Praat interface
+
+- Antal van den Bosch and Toni Rietveld for support on getting the
+  Nextens project going
+
+- Esther Klabbers for providing the Lucent-type duration module
+
+- Olga van Herwijnen for advise on implementing her phrasing algorithm
+
+- Ko van der Sloot for help with the Mbt API and the make files.
+
+- Redhat Inc. for providing Cygwin
+
+
+(Please let us know if you think you ought to be mentioned here.)
+
+
+$Id: NEXTENS-TIMBL.README,v 1.4 2006/05/23 14:00:23 emarsi Exp $
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

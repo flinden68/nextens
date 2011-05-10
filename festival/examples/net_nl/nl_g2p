@@ -1,0 +1,132 @@
+#!/bin/sh
+"true" ; exec festival --script $0 $*
+
+;;; $Id: nl_g2p,v 1.5 2007/06/13 08:07:47 emarsi Exp $
+;;;
+;;; by Erwin marsi & Joop Kerkhoff
+;;; for the NeXTenS project
+;;;
+;;; Copyright (c) 2003-2005
+;;; ILK - Tilburg University
+;;; L&S - University of Nijmegen
+;;; Stichting Spraaktechnologie
+;;;
+;;; All rights Reserved.
+;;;
+;;; See the files NEXTENS.COPYING and NEXTENS.LICENSE 
+;;; for information on usage and redistribution of this file, 
+;;; and for a DISCLAIMER OF ALL WARRANTIES.
+
+;;; grapheme to phoneme conversion for Dutch
+;;; most of this code is ripped from Alan's make_utts script
+
+
+;;; Because this is a --script type file it has to explicitly
+;;; load the initfiles: init.scm and user's .festivalrc
+
+(load (path-append libdir "init.scm"))
+
+
+(define (nl_g2p_help)
+  (format t "%s\n"
+  "nl_g2p [options] files
+
+  Perform grapheme to phoneme conversion for Dutch
+  Reads words/entries and outputs phonemes, syllables and stresses.
+  Input format is one word/entry per line. 
+  Default output format identical to that of the Dutch lexicon.
+
+  Options
+  -method <treetalk|fonpars>
+             Method used for grapheme to phoneme conversion
+             (default is treetalk)
+")
+  (quit))
+
+
+;; prevent startup message from Dutch voice
+(set! nl::silent t)
+
+;;; Because this is a --script type file it has to explicitly
+;;; load the initfiles: init.scm and user's .festivalrc
+(if (not (symbol-bound? 'caar))
+    (load (path-append libdir "init.scm")))
+
+;;; Stop those GC messages
+(gc-status nil)
+
+
+;;; Default options values
+(defvar g2p_method 'treetalk)
+
+;;; Get options
+(define (get_options)
+  (let ((files nil)
+	(o argv))
+    (if (or (member_string "-h" argv)
+	    (member_string "-help" argv)
+	    (member_string "--help" argv)
+	    (member_string "-?" argv))
+	(nl_g2p_help))
+    (while o
+      (begin
+	(cond
+	 ((string-equal "-method" (car o))
+	  (if (not (cdr o))
+	      (nl_g2p_error "no method specified"))
+	  (set! g2p_method (car (cdr o)))
+	  (set! o (cdr o)))
+	 (t
+	  (set! files (cons (car o) files))))
+	(set! o (cdr o))))
+    (if files
+	(set! input_files (reverse files))
+	(nl_g2p_error "no input files specified"))))
+
+
+(define (nl_g2p_error message)
+  (format stderr "nl_g2p error: %s\n" message)
+  (nl_g2p_help))
+
+
+(define (nl_g2p_init)
+  (cond 
+   ;; treetalk
+   ((equal? g2p_method 'treetalk)
+    (nl::setup_kunlex_treetalk)
+    (set! g2p_func nl::treetalk_lts))
+   ;; treetalk mbma
+;   ((equal? g2p_method 'treetalk_mbma)
+;    (nl::setup_kunlex_treetalk_mbma)
+;    (set! g2p_func nl::treetalk_mbma_lts))
+   ;; fonpars
+   ((equal? g2p_method 'fonpars)
+    (require 'net_nl_lts_fonpars)	
+    (nl::setup_kunlex_fonpars)
+    (set! g2p_func nl::fonpars_lts))
+   ))
+
+
+(define (do_nl_g2p fn)
+  (let ((fd  (fopen fn))
+	s)
+    (while (not (equal? (set! s (readfp fd)) (eof-val)))
+	   (format t "%l\n" 
+		   (apply  g2p_func (list s))))
+    (fclose fd)))
+
+
+(define (main)
+  (get_options)
+  (nl_g2p_init)
+
+  (mapcar
+   (lambda (f)
+     (unwind-protect
+      (do_nl_g2p f)
+      (nl_g2p_error 
+       (format nil "conversion failed for file %s\n" f))))
+   input_files))
+
+
+(main)

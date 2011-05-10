@@ -1,0 +1,63 @@
+MBT 2.0 (c) ILK-CNTS 1998-2003.
+Memory Based Tagger
+Induction of Linguistic Knowledge Research Group, Tilburg University and
+Centre for Dutch Language and Speech, University of Antwerp
+
+This is the second release of MBT.
+
+The software may still contain bugs or behave not exactly as
+documented or expected. Comments and bug-reports are welcome at:
+mbt@uvt.nl. Updates and more info may be found on our website:
+http://ilk.uvt.nl/ .
+
+Please also read our Licensing information in licence.terms .
+
+This software has been tested on:
+- Sparc platform running Solaris 2.6 and 2.7
+- Intel platform running Linux
+- PPC platform running Darwin
+
+These systems used various versions of GCC (2.95 - 3.3).
+
+Contents of this distribution:
+- sources
+- Licensing information ( License.terms )
+- Makefile for Gnu Make
+- example data files ( eindh.* , test.tok )
+- documentation ( docs/Mbt_2.0_Manual.pdf )
+
+MBT assumes a compiled version of TiMBL (Tilburg Memory-Based Learner)
+version 5.0 installed on your system. Please refer to
+http://ilk.uvt.nl to download TiMBL.
+
+How to install:
+
+- unpack the distribution:
+  > gunzip Mbt.2.0.tar.gz
+  > tar xvf Mbt.2.0.tar
+
+- the package is now in the directory ./Mbt2. Go to that
+  directory:
+  > cd Mbt2
+
+- edit the variable TIMBLPATH in the Makefile. This variable should be
+  set to the directory where a compiled Timbl 5.0 system resides.
+
+- make the Mbtg and Mbt executables by typing make:
+  > make
+ 
+  If GNU make is not your default make program, you probably need to
+  type gmake or gnumake.  MBT will not build with other make variants
+  than GNU make!
+
+- to run Mbt or Mbtg from anywhere, make sure that they become
+  accessible in your path.
+  either: add the Mbt2 directory to your path
+      or: move the programs to your favourite bin directory in your path;
+          you might need to use the rehash command after that.
+
+- please refer to the Reference Guide ( docs/Mbt_2.0_Manual.pdf ) to
+  start working with the Mbtg and Mbt programs.
+
+
+Good luck -- send questions and comment to mbt@uvt.nl .
