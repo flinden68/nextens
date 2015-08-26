@@ -1,0 +1,1 @@
+NEXTENS stands for "Nederlandse Extensie voor Tekst naar Spraak", or "Dutch Extension for Text to Speech". It provides a multi-platform, open source, diphone-based text-to-speech system for Dutch that is based on the Festival speech synthesis system. It is freely available for research and education purposes.
